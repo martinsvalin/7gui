@@ -3,7 +3,7 @@ module TemperatureConverter exposing (main)
 import Browser exposing (Document, UrlRequest, application)
 import Browser.Navigation exposing (Key)
 import Html exposing (Html, form, input, text)
-import Html.Attributes exposing (value)
+import Html.Attributes exposing (type_, value)
 import Html.Events exposing (onInput)
 import Url exposing (Url)
 
@@ -106,9 +106,19 @@ view model =
 body : Celcius -> List (Html Msg)
 body celcius =
     [ form []
-        [ input [ onInput ConvertToFahrenheit, value (String.fromFloat celcius) ] []
+        [ input
+            [ type_ "number"
+            , onInput ConvertToFahrenheit
+            , value (String.fromFloat celcius)
+            ]
+            []
         , text "Celcius = "
-        , input [ onInput ConvertToCelcius, value (String.fromFloat (toFahrenheit celcius)) ] []
+        , input
+            [ type_ "number"
+            , onInput ConvertToCelcius
+            , value (String.fromFloat (toFahrenheit celcius))
+            ]
+            []
         , text "Fahrenheit"
         ]
     ]
